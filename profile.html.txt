@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Profile | ハンギョドン 非公式ファンサイト</title>
+<link href="https://fonts.googleapis.com/css2?family=Kosugi+Maru&family=Fredoka:wght@400;600;700&family=Kaisei+Decol:wght@400;700&display=swap" rel="stylesheet">
+<style>
+  * { margin:0; padding:0; box-sizing:border-box; }
+  html { scroll-behavior:smooth; }
+  body {
+    font-family:'Kosugi Maru',sans-serif;
+    background:
+      radial-gradient(ellipse at 20% 30%, rgba(90,180,224,0.2) 0%, transparent 50%),
+      radial-gradient(ellipse at 80% 70%, rgba(192,132,252,0.15) 0%, transparent 45%),
+      linear-gradient(160deg,#0a1628 0%,#0f1f2e 50%,#1a3a5c 100%);
+    min-height:100vh; color:#e8f8ff; overflow-x:hidden;
+  }
+
+nav {
+position:sticky;top:0;z-index:100;
+background:rgba(10,22,40,0.93);backdrop-filter:blur(14px);
+border-bottom:1px solid rgba(90,180,224,0.25);
+display:flex;align-items:center;padding:0 20px;
+}
+.nav-logo{font-family:‘Fredoka’,cursive;font-weight:700;color:#5ab4e0;font-size:1.1rem;padding:16px 0;margin-right:auto;text-decoration:none;}
+nav ul{display:flex;list-style:none;flex-wrap:wrap;}
+nav ul li a{display:block;padding:16px 13px;color:#b8e4f7;text-decoration:none;font-weight:700;font-size:0.78rem;letter-spacing:0.1em;transition:color 0.2s;}
+nav ul li a:hover{color:#fff;}
+nav ul li a.active{color:#5ab4e0;}
+
+/* HERO */
+.hero{text-align:center;padding:56px 20px 48px;}
+.hero-label{display:inline-block;font-family:‘Fredoka’,cursive;font-weight:700;font-size:0.8rem;letter-spacing:0.3em;color:#5ab4e0;border:1px solid rgba(90,180,224,0.35);padding:4px 16px;border-radius:20px;margin-bottom:16px;}
+.hero h1{font-family:‘Kaisei Decol’,serif;font-weight:700;font-size:clamp(2.2rem,6vw,4rem);color:#fff;text-shadow:0 0 40px rgba(90,180,224,0.5);margin-bottom:10px;}
+.hero h1 em{font-style:normal;color:#ffb3c6;}
+
+/* MAIN CARD */
+.profile-wrap{max-width:900px;margin:0 auto;padding:0 20px 80px;}
+
+.profile-main{
+background:rgba(255,255,255,0.05);
+border:1px solid rgba(90,180,224,0.2);
+border-radius:24px;padding:36px;
+margin-bottom:32px;
+}
+
+.profile-top{display:grid;grid-template-columns:220px 1fr;gap:36px;align-items:start;}
+@media(max-width:600px){.profile-top{grid-template-columns:1fr;}}
+
+/* アフィリエイト画像エリア */
+.profile-img-area{text-align:center;}
+.profile-img-area a{display:block;border-radius:20px;overflow:hidden;border:2px solid rgba(90,180,224,0.2);transition:border-color 0.2s;}
+.profile-img-area a:hover{border-color:rgba(90,180,224,0.5);}
+.profile-img-area img{width:100%;display:block;}
+.profile-img-note{font-size:0.65rem;color:rgba(184,228,247,0.4);margin-top:8px;line-height:1.6;}
+
+/* テキストエリア */
+.profile-intro{border-left:3px solid #5ab4e0;padding-left:18px;margin-bottom:24px;color:#b8e4f7;font-size:0.98rem;line-height:2;}
+
+/* プロフィールテーブル */
+.profile-table{width:100%;border-collapse:collapse;color:#e8f8ff;font-size:0.9rem;}
+.profile-table tr{border-bottom:1px solid rgba(90,180,224,0.12);}
+.profile-table td{padding:11px 14px;}
+.profile-table td:first-child{color:#5ab4e0;font-weight:700;white-space:nowrap;width:130px;}
+
+/* サブキャラクターズ */
+.friends-section{margin-bottom:32px;}
+.sub-title{font-family:‘Fredoka’,cursive;font-weight:700;font-size:1.3rem;color:#fff;margin-bottom:20px;display:flex;align-items:center;gap:10px;}
+.sub-title::after{content:’’;flex:1;height:1px;background:rgba(90,180,224,0.2);}
+
+.friends-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:16px;}
+.friend-card{
+background:rgba(255,255,255,0.04);
+border:1px solid rgba(90,180,224,0.15);
+border-radius:16px;padding:20px 16px;text-align:center;
+transition:transform 0.2s,border-color 0.2s;
+}
+.friend-card:hover{transform:translateY(-4px);border-color:rgba(90,180,224,0.35);}
+.friend-icon{font-size:2.8rem;display:block;margin-bottom:10px;}
+
+/* アフィリエイト画像対応 */
+.friend-img{
+display:block;width:100%;
+border-radius:12px;overflow:hidden;
+margin-bottom:10px;
+border:1px solid rgba(90,180,224,0.15);
+transition:border-color 0.2s;
+background:#fff;
+}
+.friend-img img{width:100%;display:block;object-fit:cover;}
+.friend-card:hover .friend-img{border-color:rgba(90,180,224,0.4);}
+.friend-ad-note{font-size:0.6rem;color:rgba(184,228,247,0.35);margin-top:-6px;margin-bottom:8px;}
+.friend-name{font-weight:700;font-size:0.92rem;color:#fff;margin-bottom:4px;}
+.friend-date{font-size:0.72rem;color:#5ab4e0;margin-bottom:8px;font-family:‘Fredoka’,cursive;}
+.friend-desc{font-size:0.78rem;color:rgba(184,228,247,0.6);line-height:1.7;}
+
+/* 楽天グッズリンクブロック */
+.goods-link-block{
+background:linear-gradient(135deg,rgba(191,0,0,0.08),rgba(192,132,252,0.06));
+border:1px solid rgba(191,0,0,0.2);
+border-radius:16px;padding:20px 24px;margin-top:16px;
+display:flex;align-items:center;gap:16px;flex-wrap:wrap;
+}
+.goods-link-block p{color:rgba(184,228,247,0.7);font-size:0.82rem;flex:1;}
+.goods-link-block a{
+display:inline-flex;align-items:center;gap:6px;
+background:linear-gradient(135deg,#cc0000,#e60000);
+color:#fff;font-weight:700;font-size:0.85rem;
+padding:10px 20px;border-radius:12px;text-decoration:none;
+white-space:nowrap;transition:opacity 0.2s;
+box-shadow:0 4px 14px rgba(191,0,0,0.3);
+}
+.goods-link-block a:hover{opacity:0.88;}
+
+footer{text-align:center;padding:48px 20px 36px;border-top:1px solid rgba(90,180,224,0.15);}
+.footer-logo{font-family:‘Fredoka’,cursive;font-weight:700;color:#5ab4e0;font-size:1.2rem;margin-bottom:12px;}
+.footer-nav{display:flex;justify-content:center;gap:20px;flex-wrap:wrap;margin:14px 0;}
+.footer-nav a{color:#b8e4f7;text-decoration:none;font-size:0.8rem;letter-spacing:0.1em;}
+.footer-nav a:hover{color:#fff;}
+.footer-copy{color:rgba(184,228,247,0.4);font-size:0.7rem;line-height:2.2;}
+.footer-affiliate{display:inline-block;margin-bottom:10px;background:rgba(191,0,0,0.12);border:1px solid rgba(191,0,0,0.25);color:rgba(255,160,160,0.75);font-size:0.7rem;padding:5px 14px;border-radius:8px;letter-spacing:0.05em;}
+
+.reveal{opacity:0;transform:translateY(20px);transition:opacity 0.55s,transform 0.55s;}
+.reveal.visible{opacity:1;transform:translateY(0);}
+</style>
+
+</head>
+<body>
+
+<nav>
+  <a href="index.html" class="nav-logo">🐟 HANGYODON FAN</a>
+  <ul>
+    <li><a href="index.html">HOME</a></li>
+    <li><a href="profile.html" class="active">PROFILE</a></li>
+    <li><a href="collection.html">COLLECTION</a></li>
+    <li><a href="goods.html">GOODS</a></li>
+    <li><a href="videos.html">VIDEOS</a></li>
+  </ul>
+</nav>
+
+<div class="hero reveal">
+  <span class="hero-label">CHARACTER PROFILE</span>
+  <h1>🍥 <em>Hangyodon</em> 🍥</h1>
+</div>
+
+<div class="profile-wrap">
+
+  <!-- メインプロフィール -->
+
+  <div class="profile-main reveal">
+    <div class="profile-top">
+      <div class="profile-img-area">
+        <!-- 楽天アフィリエイト画像（差し替え可） -->
+        <a href="https://hb.afl.rakuten.co.jp/ichiba/1ab4e522.35329dd7.1ab4e523.1adb8199/?pc=https%3A%2F%2Fitem.rakuten.co.jp%2Fsanrio%2Fn-2508-147923%2F&link_type=pict&ut=eyJwYWdlIjoiaXRlbSIsInR5cGUiOiJwaWN0Iiwic2l6ZSI6IjMwMHgzMDAiLCJuYW0iOjEsIm5hbXAiOiJyaWdodCIsImNvbSI6MSwiY29tcCI6ImRvd24iLCJwcmljZSI6MSwiYm9yIjoxLCJjb2wiOjEsImJidG4iOjEsInByb2QiOjAsImFtcCI6ZmFsc2V9"
+           target="_blank" rel="nofollow sponsored noopener">
+          <img src="https://hbb.afl.rakuten.co.jp/hgb/1ab4e522.35329dd7.1ab4e523.1adb8199/?me_id=1200352&item_id=10095375&pc=https%3A%2F%2Fthumbnail.image.rakuten.co.jp%2F%400_mall%2Fsanrio%2Fcabinet%2Fitem2508%2Fn-2508-147923_1.jpg%3F_ex%3D300x300&s=300x300&t=pict"
+               alt="ハンギョドン サンリオ公式グッズ">
+        </a>
+        <p class="profile-img-note">© SANRIO CO., LTD.<br>※画像は広告リンクです</p>
+      </div>
+      <div>
+        <p class="profile-intro">
+          1984年にサンリオからデビューした半魚人キャラクター、ハンギョドン。<br>
+          人を笑わせることが大得意。<br>
+          でも寂しがり屋でロマンチスト、ヒーローになりたいけど、なぜかうまくいかない…そんな彼から目が離せません！
+        </p>
+        <table class="profile-table">
+          <tr><td>フルネーム</td><td>ハンギョドン（半魚丼）</td></tr>
+          <tr><td>英語名</td><td>Hangyodon</td></tr>
+          <tr><td>誕生日</td><td>3月14日</td></tr>
+          <tr><td>星座</td><td>魚座</td></tr>
+          <tr><td>血液型</td><td>B型</td></tr>
+          <tr><td>出身</td><td>中国</td></tr>
+          <tr><td>デザイナー</td><td>井上・ヒサト、原田香</td></tr>
+          <tr><td>性格</td><td>笑わせるのが得意・寂しがり屋・ロマンチスト</td></tr>
+          <tr><td>好きなもの</td><td>冷やし中華・エビセン・鍋物・温泉</td></tr>
+          <tr><td>趣味</td><td>ハンギョドングッズを集めること</td></tr>
+          <tr><td>夢</td><td>ヒーローになること</td></tr>
+          <tr><td>親友</td><td>タコのさゆりちゃん</td></tr>
+        </table>
+
+```
+    <div class="goods-link-block">
+      <p>ハンギョドンのグッズを楽天でチェック！</p>
+      <a href="https://search.rakuten.co.jp/search/mall/ハンギョドン/" target="_blank" rel="nofollow noopener">
+        🛒 楽天で探す
+      </a>
+    </div>
+  </div>
+</div>
+```
+
+  </div>
+
+  <!-- サブキャラクターズ -->
+
+  <div class="friends-section reveal">
+    <h2 class="sub-title">🐟 なかまたち</h2>
+    <div class="friends-grid">
+
+```
+  <!-- さゆり：アフィリエイト画像あり -->
+  <div class="friend-card">
+    <a href="https://hb.afl.rakuten.co.jp/ichiba/3b731ad4.49d92afe.3b731ad5.4dbfedf6/?pc=https%3A%2F%2Fitem.rakuten.co.jp%2Ftvoos%2F0506524%2F&link_type=pict&ut=eyJwYWdlIjoiaXRlbSIsInR5cGUiOiJwaWN0Iiwic2l6ZSI6IjMwMHgzMDAiLCJuYW0iOjEsIm5hbXAiOiJyaWdodCIsImNvbSI6MSwiY29tcCI6ImRvd24iLCJwcmljZSI6MCwiYm9yIjoxLCJjb2wiOjEsImJidG4iOjEsInByb2QiOjAsImFtcCI6ZmFsc2V9"
+       target="_blank" rel="nofollow sponsored noopener" class="friend-img">
+      <img src="https://hbb.afl.rakuten.co.jp/hgb/3b731ad4.49d92afe.3b731ad5.4dbfedf6/?me_id=1404842&item_id=10047807&pc=https%3A%2F%2Fthumbnail.image.rakuten.co.jp%2F%400_mall%2Ftvoos%2Fcabinet%2F010003%2F101%2F0506524.jpg%3F_ex%3D300x300&s=300x300&t=pict"
+           alt="さゆり グッズ">
+    </a>
+    <p class="friend-ad-note">※広告リンク</p>
+    <p class="friend-name">さゆり</p>
+    <p class="friend-date">誕生日：5月9日</p>
+    <p class="friend-desc">日本出身のタコで、ハンギョドンの親友。楽天的で明るく好奇心旺盛。宝物はせんす。</p>
+  </div>
+
+  <!-- すみれ：絵文字のまま -->
+  <div class="friend-card">
+    <span class="friend-icon">🦎</span>
+    <p class="friend-name">すみれ</p>
+    <p class="friend-date">誕生日：11月18日</p>
+    <p class="friend-desc">日本出身のサンショウウオで、ハンギョドンの妹。しっかり者で働き者。少々負けず嫌い。</p>
+  </div>
+
+  <!-- イタロー：アフィリエイト画像あり -->
+  <div class="friend-card">
+    <a href="https://hb.afl.rakuten.co.jp/ichiba/2216e8d7.65fc30e1.2216e8d8.825e0707/?pc=https%3A%2F%2Fitem.rakuten.co.jp%2Fperfectworld-tokyo%2F1215-164513-21%2F&link_type=pict&ut=eyJwYWdlIjoiaXRlbSIsInR5cGUiOiJwaWN0Iiwic2l6ZSI6IjMwMHgzMDAiLCJuYW0iOjEsIm5hbXAiOiJyaWdodCIsImNvbSI6MSwiY29tcCI6ImRvd24iLCJwcmljZSI6MCwiYm9yIjoxLCJjb2wiOjEsImJidG4iOjEsInByb2QiOjAsImFtcCI6ZmFsc2V9"
+       target="_blank" rel="nofollow sponsored noopener" class="friend-img">
+      <img src="https://hbb.afl.rakuten.co.jp/hgb/2216e8d7.65fc30e1.2216e8d8.825e0707/?me_id=1343785&item_id=10284329&pc=https%3A%2F%2Fimage.rakuten.co.jp%2Fperfectworld-tokyo%2Fcabinet%2Fimage69%2F1215-164513-21_2.jpg%3F_ex%3D300x300&s=300x300&t=pict"
+           alt="イタロー グッズ">
+    </a>
+    <p class="friend-ad-note">※広告リンク</p>
+    <p class="friend-name">イタロー</p>
+    <p class="friend-date">誕生日：1月2日</p>
+    <p class="friend-desc">渦巻メガネをかけたイカ。几帳面で記憶力が高い。趣味は発明だが使えないものばかり。</p>
+  </div>
+
+  <!-- おたまろ：アフィリエイト画像あり -->
+  <div class="friend-card">
+    <a href="https://hb.afl.rakuten.co.jp/ichiba/2216e8d7.65fc30e1.2216e8d8.825e0707/?pc=https%3A%2F%2Fitem.rakuten.co.jp%2Fperfectworld-tokyo%2F1215-164520-21%2F&link_type=picttext&ut=eyJwYWdlIjoiaXRlbSIsInR5cGUiOiJwaWN0dGV4dCIsInNpemUiOiIzMDB4MzAwIiwibmFtIjoxLCJuYW1wIjoicmlnaHQiLCJjb20iOjEsImNvbXAiOiJkb3duIiwicHJpY2UiOjAsImJvciI6MSwiY29sIjoxLCJiYnRuIjoxLCJwcm9kIjowLCJhbXAiOmZhbHNlfQ%3D%3D"
+       target="_blank" rel="nofollow sponsored noopener" class="friend-img">
+      <img src="https://hbb.afl.rakuten.co.jp/hgb/2216e8d7.65fc30e1.2216e8d8.825e0707/?me_id=1343785&item_id=10284330&pc=https%3A%2F%2Fimage.rakuten.co.jp%2Fperfectworld-tokyo%2Fcabinet%2Fimage69%2F1215-164520-21_3.jpg%3F_ex%3D300x300&s=300x300&t=picttext"
+           alt="おたまろ グッズ">
+    </a>
+    <p class="friend-ad-note">※広告リンク</p>
+    <p class="friend-name">おたまろ</p>
+    <p class="friend-date">誕生日：12月10日頃</p>
+    <p class="friend-desc">前足が付いたオタマジャクシ。趣味は散歩。特技はごはんのおかわりという食いしん坊。</p>
+  </div>
+
+  <!-- きんぎょちゃん：アフィリエイト画像あり -->
+  <div class="friend-card">
+    <a href="https://hb.afl.rakuten.co.jp/ichiba/51f35f17.ee698e03.51f35f19.204ef79e/?pc=https%3A%2F%2Fitem.rakuten.co.jp%2Frecycleshopaiueo%2Fhr-111-0005%2F&link_type=pict&ut=eyJwYWdlIjoiaXRlbSIsInR5cGUiOiJwaWN0Iiwic2l6ZSI6IjMwMHgzMDAiLCJuYW0iOjEsIm5hbXAiOiJyaWdodCIsImNvbSI6MSwiY29tcCI6ImRvd24iLCJwcmljZSI6MCwiYm9yIjoxLCJjb2wiOjEsImJidG4iOjEsInByb2QiOjAsImFtcCI6ZmFsc2V9"
+       target="_blank" rel="nofollow sponsored noopener" class="friend-img">
+      <img src="https://hbb.afl.rakuten.co.jp/hgb/51f35f17.ee698e03.51f35f19.204ef79e/?me_id=1415889&item_id=10002790&pc=https%3A%2F%2Fimage.rakuten.co.jp%2Frecycleshopaiueo%2Fcabinet%2Fhakurindai_new%2F111-0005_8.jpg%3F_ex%3D300x300&s=300x300&t=pict"
+           alt="きんぎょちゃん グッズ">
+    </a>
+    <p class="friend-ad-note">※広告リンク</p>
+    <p class="friend-name">きんぎょちゃん</p>
+    <p class="friend-date">—</p>
+    <p class="friend-desc">縁日でハンギョドンがもらった赤い金魚。恩返しのため3日間だけキュートな女の子に変身！</p>
+  </div>
+
+</div>
+```
+
+  </div>
+
+  <!-- はぴだんぶい -->
+
+  <div class="friends-section reveal">
+    <h2 class="sub-title">🌟 はぴだんぶい</h2>
+    <div style="background:rgba(255,255,255,0.04);border:1px solid rgba(90,180,224,0.15);border-radius:16px;padding:24px;">
+      <p style="color:#b8e4f7;font-size:0.9rem;line-height:1.9;margin-bottom:16px;">
+        2020年1月に結成されたサンリオ史上初のキャラクターユニット。<br>
+        ポチャッコ・タキシードサム・けろけろけろっぴ・<strong style="color:#fff;">ハンギョドン</strong>・バッドばつ丸の5人で活動中！
+      </p>
+      <div style="display:flex;gap:12px;flex-wrap:wrap;font-size:1.8rem;margin-bottom:20px;">
+        <span title="ポチャッコ">🐶</span>
+        <span title="タキシードサム">🐧</span>
+        <span title="けろけろけろっぴ">🐸</span>
+        <span title="ハンギョドン" style="filter:drop-shadow(0 0 8px rgba(90,180,224,0.8));">🐟</span>
+        <span title="バッドばつ丸">🐾</span>
+      </div>
+      <!-- YouTube動画埋め込み -->
+      <div style="border-radius:14px;overflow:hidden;position:relative;padding-top:56.25%;background:#000;margin-bottom:16px;">
+        <iframe
+          style="position:absolute;top:0;left:0;width:100%;height:100%;border:0;"
+          src="https://www.youtube.com/embed/cTmjxLh1elw"
+          title="はぴだんぶい"
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+          allowfullscreen>
+        </iframe>
+      </div>
+      <a href="https://twitter.com/hapidanbui" target="_blank" rel="noopener"
+         style="display:inline-flex;align-items:center;gap:6px;color:#5ab4e0;font-size:0.82rem;font-weight:700;text-decoration:none;">
+        🐦 はぴだんぶい 公式X →
+      </a>
+    </div>
+  </div>
+
+</div>
+
+<footer>
+  <p class="footer-logo">🐟 HANGYODON FAN</p>
+  <div class="footer-nav">
+    <a href="index.html">HOME</a>
+    <a href="profile.html">PROFILE</a>
+    <a href="collection.html">COLLECTION</a>
+    <a href="goods.html">GOODS</a>
+    <a href="videos.html">VIDEOS</a>
+  </div>
+  <div class="footer-affiliate">📢 当サイトはアフィリエイト広告（楽天アフィリエイト）を利用しています</div>
+  <div class="footer-copy">ハンギョドン 非公式ファンサイト　© SANRIO CO., LTD.<br>キャラクターの著作権はサンリオに帰属します。本サイトはサンリオとは一切関係ありません。</div>
+</footer>
+
+<script>
+document.querySelectorAll('.reveal').forEach(r =>
+  new IntersectionObserver(([e]) => { if(e.isIntersecting) e.target.classList.add('visible'); },{threshold:0.08}).observe(r)
+);
+</script>
+
+</body>
+</html>
