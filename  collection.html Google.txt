@@ -1,0 +1,332 @@
+<!DOCTYPE html>
+
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>My Collection | ハンギョドン 非公式ファンサイト</title>
+<link href="https://fonts.googleapis.com/css2?family=Kosugi+Maru&family=Fredoka:wght@400;600;700&family=Kaisei+Decol:wght@400;700&display=swap" rel="stylesheet">
+<style>
+  * { margin:0; padding:0; box-sizing:border-box; }
+  html { scroll-behavior:smooth; }
+body {
+font-family: 'Kosugi Maru', sans-serif;
+background:
+radial-gradient(ellipse at 15% 25%, rgba(90,180,224,0.18) 0%, transparent 50%),
+radial-gradient(ellipse at 85% 60%, rgba(192,132,252,0.12) 0%, transparent 45%),
+linear-gradient(160deg, #0a1628 0%, #0f1f2e 50%, #1a3a5c 100%);
+min-height: 100vh;
+color: #e8f8ff;
+overflow-x: hidden;
+}
+nav { position:sticky; top:0; z-index:100; background:rgba(10,22,40,0.92); backdrop-filter:blur(14px); border-bottom:1px solid rgba(90,180,224,0.25); display:flex; align-items:center; padding:0 20px; }
+.nav-logo { font-family:'Fredoka',cursive; font-weight:700; color:#5ab4e0; font-size:1.1rem; padding:16px 0; margin-right:auto; text-decoration:none; }
+nav ul { display:flex; list-style:none; flex-wrap:wrap; }
+nav ul li a { display:block; padding:16px 13px; color:#b8e4f7; text-decoration:none; font-weight:700; font-size:0.78rem; letter-spacing:0.1em; transition:color 0.2s; }
+nav ul li a:hover, nav ul li a.active { color:#fff; }
+.hero { text-align:center; padding:60px 20px 48px; }
+.hero-label { display:inline-block; font-family:'Fredoka',cursive; font-weight:700; font-size:0.8rem; letter-spacing:0.3em; color:#5ab4e0; border:1px solid rgba(90,180,224,0.35); padding:4px 16px; border-radius:20px; margin-bottom:16px; }
+.hero h1 { font-family:'Kaisei Decol',serif; font-weight:700; font-size:clamp(2.2rem,6vw,4rem); color:#fff; text-shadow:0 0 40px rgba(90,180,224,0.5); line-height:1.15; margin-bottom:12px; }
+.hero h1 em { font-style:normal; color:#ffb3c6; text-shadow:0 0 30px rgba(255,179,198,0.5); }
+.hero-desc { color:#b8e4f7; font-size:0.9rem; line-height:1.8; max-width:480px; margin:0 auto 32px; }
+.hero-stats { display:flex; justify-content:center; gap:32px; flex-wrap:wrap; }
+.stat-item { text-align:center; }
+.stat-num { font-family:'Fredoka',cursive; font-weight:700; font-size:2rem; color:#fff; display:block; line-height:1; }
+.stat-label { font-size:0.72rem; color:#b8e4f7; letter-spacing:0.1em; }
+.filter-section { padding:0 20px; }
+.filter-label { text-align:center; font-family:'Fredoka',cursive; font-size:0.72rem; font-weight:700; letter-spacing:0.2em; color:rgba(184,228,247,0.45); text-transform:uppercase; margin-bottom:8px; }
+.filter-wrap { display:flex; justify-content:center; gap:8px; flex-wrap:wrap; margin-bottom:10px; }
+.filter-btn { background:rgba(255,255,255,0.05); border:1px solid rgba(90,180,224,0.2); color:#b8e4f7; font-family:inherit; font-size:0.8rem; font-weight:700; letter-spacing:0.08em; padding:7px 18px; border-radius:50px; cursor:pointer; transition:all 0.2s; }
+.filter-btn:hover, .filter-btn.active { background:rgba(90,180,224,0.18); border-color:#5ab4e0; color:#fff; }
+.year-btn { background:rgba(255,255,255,0.04); border:1px solid rgba(255,217,125,0.2); color:rgba(255,217,125,0.6); font-family:'Fredoka',cursive; font-size:0.82rem; font-weight:700; letter-spacing:0.06em; padding:6px 16px; border-radius:50px; cursor:pointer; transition:all 0.2s; }
+.year-btn:hover, .year-btn.active { background:rgba(255,217,125,0.15); border-color:#ffd97d; color:#ffd97d; }
+.filter-divider { width:100%; max-width:480px; margin:0 auto 28px; height:1px; background:linear-gradient(90deg,transparent,rgba(90,180,224,0.2),transparent); }
+.col-wrap { max-width:1060px; margin:0 auto; padding:0 20px 80px; }
+.col-grid { columns:1; column-gap:20px; }
+@media(min-width:520px){ .col-grid { columns:2; } }
+@media(min-width:800px){ .col-grid { columns:3; } }
+.col-card { break-inside:avoid; background:rgba(255,255,255,0.045); border:1px solid rgba(90,180,224,0.15); border-radius:20px; overflow:hidden; margin-bottom:20px; transition:transform 0.25s,box-shadow 0.25s,border-color 0.25s; animation:fadeUp 0.5s ease both; cursor:pointer; }
+@keyframes fadeUp{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:translateY(0)}}
+.col-card:hover { transform:translateY(-5px); box-shadow:0 16px 48px rgba(0,0,0,0.4); border-color:rgba(90,180,224,0.4); }
+.col-card.hidden { display:none; }
+.col-img { width:100%; overflow:hidden; background:rgba(255,255,255,0.03); position:relative; }
+.col-img img { width:100%; display:block; object-fit:cover; transition:transform 0.35s; }
+.col-card:hover .col-img img { transform:scale(1.04); }
+.col-placeholder { width:100%; aspect-ratio:1/1; display:flex; flex-direction:column; align-items:center; justify-content:center; gap:10px; background:linear-gradient(135deg,rgba(90,180,224,0.06),rgba(192,132,252,0.06)); color:rgba(184,228,247,0.35); font-size:0.78rem; }
+.col-placeholder span { font-size:3rem; }
+.col-badge { position:absolute; top:10px; left:10px; font-size:0.65rem; font-weight:700; letter-spacing:0.06em; padding:3px 9px; border-radius:20px; background:rgba(10,22,40,0.8); border:1px solid rgba(90,180,224,0.35); color:#5ab4e0; }
+.col-badge-year { position:absolute; top:10px; right:10px; font-family:'Fredoka',cursive; font-weight:700; font-size:0.75rem; padding:3px 10px; border-radius:20px; background:rgba(10,22,40,0.75); color:#ffd97d; }
+.col-body { padding:16px 18px 18px; }
+.col-title { font-weight:700; font-size:0.95rem; color:#fff; line-height:1.5; margin-bottom:8px; }
+.col-tags { display:flex; gap:6px; flex-wrap:wrap; margin-bottom:10px; }
+.col-tag { font-size:0.68rem; font-weight:700; letter-spacing:0.06em; padding:2px 8px; border-radius:10px; background:rgba(90,180,224,0.12); border:1px solid rgba(90,180,224,0.25); color:#5ab4e0; }
+.col-memo { font-size:0.8rem; color:rgba(184,228,247,0.65); line-height:1.8; margin-bottom:14px; }
+.col-rakuten { display:flex; align-items:center; justify-content:center; gap:6px; width:100%; background:rgba(191,0,0,0.15); border:1px solid rgba(191,0,0,0.3); color:rgba(255,160,160,0.85); font-family:inherit; font-size:0.78rem; font-weight:700; padding:8px; border-radius:10px; text-decoration:none; letter-spacing:0.05em; transition:all 0.2s; }
+.col-rakuten:hover { background:rgba(191,0,0,0.25); color:#fff; }
+.lightbox { display:none; position:fixed; inset:0; z-index:200; background:rgba(0,0,0,0.88); backdrop-filter:blur(8px); align-items:center; justify-content:center; padding:20px; }
+.lightbox.open { display:flex; }
+.lb-box { background:rgba(15,31,46,0.98); border:1px solid rgba(90,180,224,0.3); border-radius:24px; overflow:hidden; max-width:520px; width:100%; animation:lbIn 0.25s ease; position:relative; }
+@keyframes lbIn{from{opacity:0;transform:scale(0.92)}to{opacity:1;transform:scale(1)}}
+.lb-img { width:100%; aspect-ratio:1/1; object-fit:cover; display:block; }
+.lb-placeholder { width:100%; aspect-ratio:1/1; display:flex; align-items:center; justify-content:center; font-size:5rem; background:linear-gradient(135deg,rgba(90,180,224,0.08),rgba(192,132,252,0.08)); }
+.lb-body { padding:22px 26px 26px; }
+.lb-title { font-weight:700; font-size:1.2rem; color:#fff; margin-bottom:8px; }
+.lb-meta { color:#5ab4e0; font-size:0.82rem; margin-bottom:12px; }
+.lb-memo { color:#b8e4f7; font-size:0.88rem; line-height:1.9; margin-bottom:18px; }
+.lb-close { position:absolute; top:14px; right:16px; background:rgba(255,255,255,0.1); border:none; border-radius:50%; width:36px; height:36px; font-size:1rem; cursor:pointer; color:#fff; display:flex; align-items:center; justify-content:center; transition:background 0.2s; }
+.lb-close:hover { background:rgba(255,255,255,0.2); }
+footer { text-align:center; padding:48px 20px 36px; border-top:1px solid rgba(90,180,224,0.15); }
+.footer-logo { font-family:'Fredoka',cursive; font-weight:700; color:#5ab4e0; font-size:1.2rem; margin-bottom:12px; }
+.footer-nav { display:flex; justify-content:center; gap:20px; flex-wrap:wrap; margin:14px 0; }
+.footer-nav a { color:#b8e4f7; text-decoration:none; font-size:0.8rem; letter-spacing:0.1em; }
+.footer-nav a:hover { color:#fff; }
+.footer-copy { color:rgba(184,228,247,0.4); font-size:0.7rem; line-height:2.2; }
+.footer-affiliate { display:inline-block; margin-bottom:10px; background:rgba(191,0,0,0.12); border:1px solid rgba(191,0,0,0.25); color:rgba(255,160,160,0.75); font-size:0.7rem; padding:5px 14px; border-radius:8px; letter-spacing:0.05em; }
+.reveal{opacity:0;transform:translateY(20px);transition:opacity 0.55s,transform 0.55s;}
+.reveal.visible{opacity:1;transform:translateY(0);}
+</style>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-JGF0YXBQSF"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+gtag(‘config’, ‘G-JGF0YXBQSF’);
+</script>
+
+</head>
+<body>
+
+<nav>
+  <a href="index.html" class="nav-logo">🐟 HANGYODON FAN</a>
+  <ul>
+    <li><a href="index.html">HOME</a></li>
+    <li><a href="collection.html" class="active">MY COLLECTION</a></li>
+    <li><a href="goods.html">GOODS</a></li>
+  </ul>
+</nav>
+
+<div class="hero reveal">
+  <span class="hero-label">PERSONAL ARCHIVE</span>
+  <h1>My <em>Collection</em></h1>
+  <p class="hero-desc">わたしが集めてきたハンギョドングッズたち。<br>実物写真と一緒に、思い出を記録しています。</p>
+  <div class="hero-stats">
+    <div class="stat-item"><span class="stat-num" id="totalCount">3</span><span class="stat-label">ITEMS</span></div>
+    <div class="stat-item"><span class="stat-num">2019</span><span class="stat-label">SINCE</span></div>
+    <div class="stat-item"><span class="stat-num">4</span><span class="stat-label">CATEGORIES</span></div>
+  </div>
+</div>
+
+<div class="filter-section reveal">
+  <p class="filter-label">Category</p>
+  <div class="filter-wrap" id="catFilter">
+    <button class="filter-btn active" data-filter="all">すべて</button>
+    <button class="filter-btn" data-filter="ぬいぐるみ">🧸 ぬいぐるみ</button>
+    <button class="filter-btn" data-filter="文房具">✏️ 文房具</button>
+    <button class="filter-btn" data-filter="食器">🍱 食器</button>
+    <button class="filter-btn" data-filter="アパレル">👕 アパレル</button>
+    <button class="filter-btn" data-filter="その他">🎀 その他</button>
+  </div>
+  <div class="filter-divider"></div>
+  <p class="filter-label">Year</p>
+  <div class="filter-wrap" id="yearFilter">
+    <button class="year-btn active" data-year="all">すべて</button>
+  </div>
+</div>
+
+<div style="padding-bottom:32px;"></div>
+
+<div class="col-wrap">
+  <div class="col-grid" id="colGrid">
+
+<div class="col-card" data-category="ぬいぐるみ" data-year="2024" onclick="openLb(this)"
+  data-title="ハンギョドン ビッグぬいぐるみ（約40cm）"
+  data-series="はぴだんぶい"
+  data-memo="もっちもちで抱き心地最高！お部屋に飾っても映えるサイズ感。推しぬいの中でいちばんのお気に入り🐟"
+  data-rakuten="https://hb.afl.rakuten.co.jp/hgc/1a9e901b.84ea458f.1a9e901c.acd75354/?pc=https%3A%2F%2Fsearch.rakuten.co.jp%2Fsearch%2Fmall%2F%E3%83%8F%E3%83%B3%E3%82%AE%E3%83%A7%E3%83%89%E3%83%B3%2F&link_type=text&ut=eyJwYWdlIjoidXJsIiwidHlwZSI6InRleHQiLCJjb2wiOjF9" data-emoji="🧸">
+  <div class="col-img">
+    <div class="col-placeholder"><span>🧸</span>写真を追加</div>
+    <span class="col-badge">ぬいぐるみ</span>
+    <span class="col-badge-year">2024</span>
+  </div>
+  <div class="col-body">
+    <p class="col-title">ハンギョドン ビッグぬいぐるみ（約40cm）</p>
+    <div class="col-tags"><span class="col-tag">はぴだんぶい</span><span class="col-tag">2024</span></div>
+    <p class="col-memo">もっちもちで抱き心地最高！推しぬいの中でいちばんのお気に入り🐟</p>
+    <a href="https://hb.afl.rakuten.co.jp/hgc/1a9e901b.84ea458f.1a9e901c.acd75354/?pc=https%3A%2F%2Fsearch.rakuten.co.jp%2Fsearch%2Fmall%2F%E3%83%8F%E3%83%B3%E3%82%AE%E3%83%A7%E3%83%89%E3%83%B3%2F&link_type=text&ut=eyJwYWdlIjoidXJsIiwidHlwZSI6InRleHQiLCJjb2wiOjF9" class="col-rakuten" target="_blank" rel="nofollow sponsored noopener" onclick="event.stopPropagation()">🛒 楽天で似たグッズを探す</a>
+  </div>
+</div>
+
+<div class="col-card" data-category="文房具" data-year="2023" onclick="openLb(this)"
+  data-title="ハンギョドン マスキングテープ 3本セット"
+  data-series="サンリオ"
+  data-memo="柄がとにかくかわいくて手帳デコに毎日使ってます。左がお気に入り。"
+  data-rakuten="https://hb.afl.rakuten.co.jp/hgc/1a9e901b.84ea458f.1a9e901c.acd75354/?pc=https%3A%2F%2Fsearch.rakuten.co.jp%2Fsearch%2Fmall%2F%E3%83%8F%E3%83%B3%E3%82%AE%E3%83%A7%E3%83%89%E3%83%B3%2F&link_type=text&ut=eyJwYWdlIjoidXJsIiwidHlwZSI6InRleHQiLCJjb2wiOjF9" data-emoji="✏️">
+  <div class="col-img">
+    <div class="col-placeholder" style="aspect-ratio:4/3"><span>✏️</span>写真を追加</div>
+    <span class="col-badge">文房具</span>
+    <span class="col-badge-year">2023</span>
+  </div>
+  <div class="col-body">
+    <p class="col-title">ハンギョドン マスキングテープ 3本セット</p>
+    <div class="col-tags"><span class="col-tag">サンリオ</span><span class="col-tag">2023</span></div>
+    <p class="col-memo">柄がとにかくかわいくて手帳デコに毎日使ってます。</p>
+    <a href="https://hb.afl.rakuten.co.jp/hgc/1a9e901b.84ea458f.1a9e901c.acd75354/?pc=https%3A%2F%2Fsearch.rakuten.co.jp%2Fsearch%2Fmall%2F%E3%83%8F%E3%83%B3%E3%82%AE%E3%83%A7%E3%83%89%E3%83%B3%2F&link_type=text&ut=eyJwYWdlIjoidXJsIiwidHlwZSI6InRleHQiLCJjb2wiOjF9" class="col-rakuten" target="_blank" rel="nofollow sponsored noopener" onclick="event.stopPropagation()">🛒 楽天で似たグッズを探す</a>
+  </div>
+</div>
+
+<div class="col-card" data-category="食器" data-year="2022" onclick="openLb(this)"
+  data-title="ハンギョドン お弁当箱（2段）"
+  data-series="サンリオ"
+  data-memo="お弁当を詰めるたびにテンション上がる！サイズ感もちょうどよくて毎日使えます。"
+  data-rakuten="https://hb.afl.rakuten.co.jp/hgc/1a9e901b.84ea458f.1a9e901c.acd75354/?pc=https%3A%2F%2Fsearch.rakuten.co.jp%2Fsearch%2Fmall%2F%E3%83%8F%E3%83%B3%E3%82%AE%E3%83%A7%E3%83%89%E3%83%B3%2F&link_type=text&ut=eyJwYWdlIjoidXJsIiwidHlwZSI6InRleHQiLCJjb2wiOjF9" data-emoji="🍱">
+  <div class="col-img">
+    <div class="col-placeholder"><span>🍱</span>写真を追加</div>
+    <span class="col-badge">食器</span>
+    <span class="col-badge-year">2022</span>
+  </div>
+  <div class="col-body">
+    <p class="col-title">ハンギョドン お弁当箱（2段）</p>
+    <div class="col-tags"><span class="col-tag">サンリオ</span><span class="col-tag">2022</span></div>
+    <p class="col-memo">毎日使えるお気に入り。お弁当を詰めるたびにテンション上がる！</p>
+    <a href="https://hb.afl.rakuten.co.jp/hgc/1a9e901b.84ea458f.1a9e901c.acd75354/?pc=https%3A%2F%2Fsearch.rakuten.co.jp%2Fsearch%2Fmall%2F%E3%83%8F%E3%83%B3%E3%82%AE%E3%83%A7%E3%83%89%E3%83%B3%2F&link_type=text&ut=eyJwYWdlIjoidXJsIiwidHlwZSI6InRleHQiLCJjb2wiOjF9" class="col-rakuten" target="_blank" rel="nofollow sponsored noopener" onclick="event.stopPropagation()">🛒 楽天で似たグッズを探す</a>
+  </div>
+</div>
+
+<!--
+追加テンプレート：
+<div class="col-card" data-category="カテゴリ" data-year="西暦4桁" onclick="openLb(this)"
+  data-title="タイトル" data-series="シリーズ名"
+  data-memo="ひとことメモ" data-rakuten="https://hb.afl.rakuten.co.jp/hgc/1a9e901b.84ea458f.1a9e901c.acd75354/?pc=https%3A%2F%2Fsearch.rakuten.co.jp%2Fsearch%2Fmall%2F%E3%83%8F%E3%83%B3%E3%82%AE%E3%83%A7%E3%83%89%E3%83%B3%2F&link_type=text&ut=eyJwYWdlIjoidXJsIiwidHlwZSI6InRleHQiLCJjb2wiOjF9" data-emoji="絵文字">
+  <div class="col-img">
+    <img src="画像パス" alt="タイトル">
+    <span class="col-badge">カテゴリ</span>
+    <span class="col-badge-year">西暦</span>
+  </div>
+  <div class="col-body">
+    <p class="col-title">タイトル</p>
+    <div class="col-tags"><span class="col-tag">シリーズ</span><span class="col-tag">西暦</span></div>
+    <p class="col-memo">ひとことメモ</p>
+    <a href="https://hb.afl.rakuten.co.jp/hgc/1a9e901b.84ea458f.1a9e901c.acd75354/?pc=https%3A%2F%2Fsearch.rakuten.co.jp%2Fsearch%2Fmall%2F%E3%83%8F%E3%83%B3%E3%82%AE%E3%83%A7%E3%83%89%E3%83%B3%2F&link_type=text&ut=eyJwYWdlIjoidXJsIiwidHlwZSI6InRleHQiLCJjb2wiOjF9" class="col-rakuten" target="_blank" rel="nofollow sponsored noopener" onclick="event.stopPropagation()">🛒 楽天で似たグッズを探す</a>
+  </div>
+</div>
+-->
+
+  </div>
+</div>
+
+<div class="lightbox" id="lightbox" onclick="closeLb(event)">
+  <div class="lb-box">
+    <button class="lb-close" onclick="closeLb()">✕</button>
+    <div class="lb-placeholder" id="lbPlaceholder">🐟</div>
+    <img class="lb-img" id="lbImg" src="" alt="" style="display:none">
+    <div class="lb-body">
+      <p class="lb-title" id="lbTitle"></p>
+      <p class="lb-meta" id="lbMeta"></p>
+      <p class="lb-memo" id="lbMemo"></p>
+      <a href="https://hb.afl.rakuten.co.jp/hgc/1a9e901b.84ea458f.1a9e901c.acd75354/?pc=https%3A%2F%2Fsearch.rakuten.co.jp%2Fsearch%2Fmall%2F%E3%83%8F%E3%83%B3%E3%82%AE%E3%83%A7%E3%83%89%E3%83%B3%2F&link_type=text&ut=eyJwYWdlIjoidXJsIiwidHlwZSI6InRleHQiLCJjb2wiOjF9" class="col-rakuten" id="lbRakuten" target="_blank" rel="nofollow sponsored noopener" style="display:none">🛒 楽天で似たグッズを探す</a>
+    </div>
+  </div>
+</div>
+
+<footer>
+  <p class="footer-logo">🐟 HANGYODON FAN</p>
+  <div class="footer-nav">
+    <a href="index.html">HOME</a>
+    <a href="collection.html">MY COLLECTION</a>
+    <a href="goods.html">GOODS</a>
+  </div>
+  <div class="footer-affiliate">📢 当サイトはアフィリエイト広告（楽天アフィリエイト）を利用しています</div>
+  <div class="footer-copy">ハンギョドン 非公式ファンサイト　© SANRIO CO., LTD.<br>キャラクターの著作権はサンリオに帰属します。本サイトはサンリオとは一切関係ありません。</div>
+</footer>
+
+<script>
+let currentCat  = 'all';
+let currentYear = 'all';
+
+function applyFilters() {
+  document.querySelectorAll('.col-card').forEach(card => {
+    const catOk  = currentCat  === 'all' || card.dataset.category === currentCat;
+    const yearOk = currentYear === 'all' || card.dataset.year     === currentYear;
+    card.classList.toggle('hidden', !(catOk && yearOk));
+  });
+}
+
+document.querySelectorAll('#catFilter .filter-btn').forEach(btn => {
+  btn.addEventListener('click', () => {
+    document.querySelectorAll('#catFilter .filter-btn').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    currentCat = btn.dataset.filter;
+    applyFilters();
+  });
+});
+
+function buildYearButtons() {
+  const years = [...new Set(
+    [...document.querySelectorAll('.col-card')].map(c => c.dataset.year).filter(Boolean)
+  )].sort((a, b) => b - a);
+  const container = document.getElementById('yearFilter');
+  years.forEach(y => {
+    const btn = document.createElement('button');
+    btn.className = 'year-btn';
+    btn.dataset.year = y;
+    btn.textContent = y;
+    btn.addEventListener('click', () => {
+      document.querySelectorAll('#yearFilter .year-btn').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      currentYear = y;
+      applyFilters();
+    });
+    container.appendChild(btn);
+  });
+  container.querySelector('[data-year="all"]').addEventListener('click', function() {
+    document.querySelectorAll('#yearFilter .year-btn').forEach(b => b.classList.remove('active'));
+    this.classList.add('active');
+    currentYear = 'all';
+    applyFilters();
+  });
+}
+buildYearButtons();
+
+window.addEventListener('DOMContentLoaded', () => {
+  const hash = decodeURIComponent(location.hash.replace('#', ''));
+  if (hash && hash !== '') {
+    currentCat = hash;
+    document.querySelectorAll('#catFilter .filter-btn').forEach(b => {
+      b.classList.toggle('active', b.dataset.filter === hash);
+    });
+    applyFilters();
+    const fw = document.querySelector('.filter-section');
+    if (fw) setTimeout(() => fw.scrollIntoView({behavior:'smooth',block:'start'}), 100);
+  }
+});
+
+function openLb(el) {
+  document.getElementById('lbTitle').textContent = el.dataset.title || '';
+  document.getElementById('lbMeta').textContent = [el.dataset.year, el.dataset.series].filter(Boolean).join(' / ');
+  document.getElementById('lbMemo').textContent = el.dataset.memo || '';
+  const imgEl = el.querySelector('img');
+  const lbImg = document.getElementById('lbImg');
+  const lbPh  = document.getElementById('lbPlaceholder');
+  if (imgEl) { lbImg.src = imgEl.src; lbImg.style.display='block'; lbPh.style.display='none'; }
+  else { lbImg.style.display='none'; lbPh.style.display='flex'; lbPh.textContent = el.dataset.emoji || '🐟'; }
+  const rb = document.getElementById('lbRakuten');
+  if (el.dataset.rakuten) { rb.href = el.dataset.rakuten; rb.style.display='flex'; } else { rb.style.display='none'; }
+  document.getElementById('lightbox').classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
+function closeLb(e) {
+  if (!e || e.target === document.getElementById('lightbox') || e.target.classList.contains('lb-close')) {
+    document.getElementById('lightbox').classList.remove('open');
+    document.body.style.overflow = '';
+  }
+}
+document.addEventListener('keydown', e => { if(e.key==='Escape') closeLb({target:document.getElementById('lightbox')}); });
+document.querySelectorAll('.reveal').forEach(r =>
+  new IntersectionObserver(([e]) => { if(e.isIntersecting) e.target.classList.add('visible'); },{threshold:0.08}).observe(r)
+);
+</script>
+
+</body>
+</html>
